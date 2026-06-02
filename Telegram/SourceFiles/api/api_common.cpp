@@ -25,7 +25,7 @@ MTPSuggestedPost SuggestToMTP(SuggestOptions suggest) {
 		: MTPSuggestedPost();
 }
 
-SendAction::SendAction(
+Api::SendAction::SendAction(
 	not_null<Data::Thread*> thread,
 	SendOptions options)
 : history(thread->owningHistory())

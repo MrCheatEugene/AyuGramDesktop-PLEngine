@@ -16,7 +16,7 @@ namespace details {
 class Dcenter;
 class Session;
 
-[[nodiscard]] int GetNextRequestId();
+__declspec(dllexport) [[nodiscard]] int GetNextRequestId();
 
 } // namespace details
 
@@ -149,7 +149,7 @@ public:
 	void sendAnything(ShiftedDcId shiftedDcId = 0, crl::time msCanWait = 0);
 
 	template <typename Request>
-	mtpRequestId send(
+	__declspec(dllexport) mtpRequestId send(
 			const Request &request,
 			ResponseHandler &&callbacks = {},
 			ShiftedDcId shiftedDcId = 0,
@@ -170,7 +170,24 @@ public:
 	}
 
 	template <typename Request>
-	mtpRequestId send(
+	__declspec(dllexport) mtpRequestId sendReq(
+			const Request &request_us,
+			ResponseHandler &&callbacks = {},
+			ShiftedDcId shiftedDcId = 0,
+			crl::time msCanWait = 0,
+			mtpRequestId afterRequestId = 0,
+			mtpRequestId overrideRequestId = 0) {
+		const auto requestId = overrideRequestId
+			? overrideRequestId
+			: details::GetNextRequestId();
+		auto request = details::SerializedRequest::Serialize(request_us);
+		sendRequest(
+			requestId, std::move(request), std::move(callbacks), shiftedDcId, msCanWait, true, afterRequestId);
+		return requestId;
+	}
+
+	template <typename Request>
+	__declspec(dllexport) mtpRequestId send(
 			const Request &request,
 			DoneHandler &&onDone,
 			FailHandler &&onFail = nullptr,
@@ -188,7 +205,7 @@ public:
 	}
 
 	template <typename Request>
-	mtpRequestId sendProtocolMessage(
+	__declspec(dllexport) mtpRequestId sendProtocolMessage(
 			ShiftedDcId shiftedDcId,
 			const Request &request) {
 		const auto requestId = details::GetNextRequestId();
@@ -203,7 +220,7 @@ public:
 		return requestId;
 	}
 
-	void sendSerialized(
+	__declspec(dllexport) void sendSerialized(
 			mtpRequestId requestId,
 			details::SerializedRequest &&request,
 			ResponseHandler &&callbacks,
@@ -230,14 +247,13 @@ Q_SIGNALS:
 		qint64 expireAt);
 
 private:
-	void sendRequest(
-		mtpRequestId requestId,
-		details::SerializedRequest &&request,
-		ResponseHandler &&callbacks,
-		ShiftedDcId shiftedDcId,
-		crl::time msCanWait,
-		bool needsLayer,
-		mtpRequestId afterRequestId);
+	__declspec(dllexport) void sendRequest(mtpRequestId requestId,
+										   details::SerializedRequest &&request,
+										   ResponseHandler &&callbacks,
+										   ShiftedDcId shiftedDcId,
+										   crl::time msCanWait,
+										   bool needsLayer,
+										   mtpRequestId afterRequestId);
 
 	class Private;
 	const std::unique_ptr<Private> _private;

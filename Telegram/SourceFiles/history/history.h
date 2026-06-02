@@ -245,7 +245,7 @@ public:
 	[[nodiscard]] bool isReadyFor(MsgId msgId); // has messages for showing history at msgId
 	void getReadyFor(MsgId msgId);
 
-	[[nodiscard]] HistoryItem *lastMessage() const;
+	[[nodiscard]] HistoryItem *lastMessage() const { return _lastMessage.value_or(nullptr); }
 	[[nodiscard]] HistoryItem *lastServerMessage() const;
 	[[nodiscard]] bool lastMessageKnown() const;
 	[[nodiscard]] bool lastServerMessageKnown() const;

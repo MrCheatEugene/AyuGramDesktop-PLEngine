@@ -168,68 +168,68 @@ public:
 		return *_session;
 	}
 
-	[[nodiscard]] Groups &groups() {
+	__declspec(dllexport) [[nodiscard]] Groups &groups() {
 		return _groups;
 	}
-	[[nodiscard]] const Groups &groups() const {
+	__declspec(dllexport) [[nodiscard]] const Groups &groups() const {
 		return _groups;
 	}
-	[[nodiscard]] ChatFilters &chatsFilters() const {
+	__declspec(dllexport) [[nodiscard]] ChatFilters &chatsFilters() const {
 		return *_chatsFilters;
 	}
-	[[nodiscard]] ShortcutMessages &shortcutMessages() const {
+	__declspec(dllexport) [[nodiscard]] ShortcutMessages &shortcutMessages() const {
 		return *_shortcutMessages;
 	}
-	[[nodiscard]] SendActionManager &sendActionManager() const {
+	__declspec(dllexport) [[nodiscard]] SendActionManager &sendActionManager() const {
 		return *_sendActionManager;
 	}
-	[[nodiscard]] CloudThemes &cloudThemes() const {
+	__declspec(dllexport) [[nodiscard]] CloudThemes &cloudThemes() const {
 		return *_cloudThemes;
 	}
-	[[nodiscard]] Streaming &streaming() const {
+	__declspec(dllexport) [[nodiscard]] Streaming &streaming() const {
 		return *_streaming;
 	}
-	[[nodiscard]] MediaRotation &mediaRotation() const {
+	__declspec(dllexport) [[nodiscard]] MediaRotation &mediaRotation() const {
 		return *_mediaRotation;
 	}
-	[[nodiscard]] Histories &histories() const {
+	__declspec(dllexport) [[nodiscard]] Histories &histories() const {
 		return *_histories;
 	}
-	[[nodiscard]] Stickers &stickers() const {
+	__declspec(dllexport) [[nodiscard]] Stickers &stickers() const {
 		return *_stickers;
 	}
-	[[nodiscard]] Reactions &reactions() const {
+	__declspec(dllexport) [[nodiscard]] Reactions &reactions() const {
 		return *_reactions;
 	}
-	[[nodiscard]] EmojiStatuses &emojiStatuses() const {
+	__declspec(dllexport) [[nodiscard]] EmojiStatuses &emojiStatuses() const {
 		return *_emojiStatuses;
 	}
-	[[nodiscard]] ForumIcons &forumIcons() const {
+	__declspec(dllexport) [[nodiscard]] ForumIcons &forumIcons() const {
 		return *_forumIcons;
 	}
-	[[nodiscard]] NotifySettings &notifySettings() const {
+	__declspec(dllexport) [[nodiscard]] NotifySettings &notifySettings() const {
 		return *_notifySettings;
 	}
-	[[nodiscard]] CustomEmojiManager &customEmojiManager() const {
+	__declspec(dllexport) [[nodiscard]] CustomEmojiManager &customEmojiManager() const {
 		return *_customEmojiManager;
 	}
-	[[nodiscard]] Stories &stories() const {
+	__declspec(dllexport) [[nodiscard]] Stories &stories() const {
 		return *_stories;
 	}
-	[[nodiscard]] SavedMusic &savedMusic() const {
+	__declspec(dllexport) [[nodiscard]] SavedMusic &savedMusic() const {
 		return *_savedMusic;
 	}
-	[[nodiscard]] SavedMessages &savedMessages() const {
+	__declspec(dllexport) [[nodiscard]] SavedMessages &savedMessages() const {
 		return *_savedMessages;
 	}
-	[[nodiscard]] Chatbots &chatbots() const {
+	__declspec(dllexport) [[nodiscard]] Chatbots &chatbots() const {
 		return *_chatbots;
 	}
-	[[nodiscard]] BusinessInfo &businessInfo() const {
+	__declspec(dllexport) [[nodiscard]] BusinessInfo &businessInfo() const {
 		return *_businessInfo;
 	}
 
-	[[nodiscard]] MsgId nextNonHistoryEntryId() {
+	__declspec(dllexport) [[nodiscard]] MsgId nextNonHistoryEntryId() {
 		return ++_nonHistoryEntryId;
 	}
 
@@ -330,12 +330,12 @@ public:
 	[[nodiscard]] UserData *userByPhone(const QString &phone) const;
 	[[nodiscard]] PeerData *peerByUsername(const QString &username) const;
 
-	[[nodiscard]] not_null<History*> history(PeerId peerId);
-	[[nodiscard]] History *historyLoaded(PeerId peerId) const;
-	[[nodiscard]] not_null<History*> history(UserId userId) = delete;
-	[[nodiscard]] History *historyLoaded(UserId userId) const = delete;
-	[[nodiscard]] not_null<History*> history(not_null<const PeerData*> peer);
-	[[nodiscard]] History *historyLoaded(const PeerData *peer);
+	__declspec(dllexport) [[nodiscard]] not_null<History*> history(PeerId peerId);
+	__declspec(dllexport) [[nodiscard]] History *historyLoaded(PeerId peerId) const;
+	__declspec(dllexport) [[nodiscard]] not_null<History*> history(UserId userId) = delete;
+	__declspec(dllexport) [[nodiscard]] History *historyLoaded(UserId userId) const = delete;
+	__declspec(dllexport) [[nodiscard]] not_null<History*> history(not_null<const PeerData*> peer);
+	__declspec(dllexport) [[nodiscard]] History *historyLoaded(const PeerData *peer);
 
 	void deleteConversationLocally(not_null<PeerData*> peer);
 

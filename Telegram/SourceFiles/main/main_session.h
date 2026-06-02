@@ -102,7 +102,8 @@ struct FreezeInfo {
 		const FreezeInfo &) = default;
 };
 
-class Session final : public base::has_weak_ptr {
+class __declspec(dllexport) Session final : public base::has_weak_ptr
+{
 public:
 	Session(
 		not_null<Account*> account,

@@ -182,8 +182,6 @@ public:
 			showOther(type);
 		});
 	}
-
-protected:
 	void build(
 		not_null<Ui::VerticalLayout*> container,
 		SectionBuildMethod method);

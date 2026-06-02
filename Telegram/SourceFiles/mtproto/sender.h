@@ -206,6 +206,7 @@ public:
 		return *_instance;
 	}
 
+	__declspec(dllexport) Instance *instancePtr() const { return _instance; }
 	template <typename Request>
 	class SpecificRequestBuilder : public RequestBuilder {
 	private:

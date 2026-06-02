@@ -162,59 +162,59 @@ public:
 	UserData(not_null<Data::Session*> owner, PeerId id);
 	~UserData();
 
-	void setPhoto(const MTPUserProfilePhoto &photo);
+	__declspec(dllexport) void setPhoto(const MTPUserProfilePhoto &photo);
 
-	void setName(
+	__declspec(dllexport) void setName(
 		const QString &newFirstName,
 		const QString &newLastName,
 		const QString &newPhoneName,
 		const QString &newUsername);
-	void setUsernames(const Data::Usernames &newUsernames);
+	__declspec(dllexport) void setUsernames(const Data::Usernames &newUsernames);
 
-	void setUsername(const QString &username);
-	void setPhone(const QString &newPhone);
-	void setBotInfoVersion(int version);
-	void setBotInfo(const MTPBotInfo &info);
+	__declspec(dllexport) void setUsername(const QString &username);
+	__declspec(dllexport) void setPhone(const QString &newPhone);
+	__declspec(dllexport) void setBotInfoVersion(int version);
+	__declspec(dllexport) void setBotInfo(const MTPBotInfo &info);
 
-	void setNameOrPhone(const QString &newNameOrPhone);
+	__declspec(dllexport) void setNameOrPhone(const QString &newNameOrPhone);
 
-	void madeAction(TimeId when); // pseudo-online
+	__declspec(dllexport) void madeAction(TimeId when); // pseudo-online
 
-	[[nodiscard]] uint64 accessHash() const {
+	__declspec(dllexport) uint64 accessHash() const {
 		return _accessHash;
 	}
-	void setAccessHash(uint64 accessHash);
+	__declspec(dllexport) void setAccessHash(uint64 accessHash);
 
-	auto flags() const {
+	__declspec(dllexport) auto flags() const {
 		return _flags.current();
 	}
-	auto flagsValue() const {
+	__declspec(dllexport) auto flagsValue() const {
 		return _flags.value();
 	}
-	void setFlags(UserDataFlags which);
-	void addFlags(UserDataFlags which);
-	void removeFlags(UserDataFlags which);
+	__declspec(dllexport) void setFlags(UserDataFlags which);
+	__declspec(dllexport) void addFlags(UserDataFlags which);
+	__declspec(dllexport) void removeFlags(UserDataFlags which);
 
-	[[nodiscard]] bool isVerified() const;
-	[[nodiscard]] bool isScam() const;
-	[[nodiscard]] bool isFake() const;
-	[[nodiscard]] bool isPremium() const;
-	[[nodiscard]] bool isBotInlineGeo() const;
-	[[nodiscard]] bool isBot() const;
-	[[nodiscard]] bool isSupport() const;
-	[[nodiscard]] bool isInaccessible() const;
-	[[nodiscard]] bool applyMinPhoto() const;
-	[[nodiscard]] bool hasPersonalPhoto() const;
-	[[nodiscard]] bool hasStoriesHidden() const;
-	[[nodiscard]] bool hasRequirePremiumToWrite() const;
-	[[nodiscard]] bool hasStarsPerMessage() const;
-	[[nodiscard]] bool requiresPremiumToWrite() const;
-	[[nodiscard]] bool messageMoneyRestrictionsKnown() const;
-	[[nodiscard]] bool canSendIgnoreMoneyRestrictions() const;
-	[[nodiscard]] bool readDatesPrivate() const;
-	[[nodiscard]] bool allowsForwarding() const;
-	[[nodiscard]] bool isAyuNoForwards() const;
-	void setNoForwardsFlags(bool myEnabled, bool peerEnabled);
+	__declspec(dllexport) [[nodiscard]] bool isVerified() const;
+	__declspec(dllexport) [[nodiscard]] bool isScam() const;
+	__declspec(dllexport) [[nodiscard]] bool isFake() const;
+	__declspec(dllexport) [[nodiscard]] bool isPremium() const;
+	__declspec(dllexport) [[nodiscard]] bool isBotInlineGeo() const;
+	__declspec(dllexport) [[nodiscard]] bool isBot() const;
+	__declspec(dllexport) [[nodiscard]] bool isSupport() const;
+	__declspec(dllexport) [[nodiscard]] bool isInaccessible() const;
+	__declspec(dllexport) [[nodiscard]] bool applyMinPhoto() const;
+	__declspec(dllexport) [[nodiscard]] bool hasPersonalPhoto() const;
+	__declspec(dllexport) [[nodiscard]] bool hasStoriesHidden() const;
+	__declspec(dllexport) [[nodiscard]] bool hasRequirePremiumToWrite() const;
+	__declspec(dllexport) [[nodiscard]] bool hasStarsPerMessage() const;
+	__declspec(dllexport) [[nodiscard]] bool requiresPremiumToWrite() const;
+	__declspec(dllexport) [[nodiscard]] bool messageMoneyRestrictionsKnown() const;
+	__declspec(dllexport) [[nodiscard]] bool canSendIgnoreMoneyRestrictions() const;
+	__declspec(dllexport) [[nodiscard]] bool readDatesPrivate() const;
+	__declspec(dllexport) [[nodiscard]] bool allowsForwarding() const;
+	__declspec(dllexport) [[nodiscard]] bool isAyuNoForwards() const;
+	__declspec(dllexport) void setNoForwardsFlags(bool myEnabled, bool peerEnabled);
 	[[nodiscard]] bool isForum() const {
 		return flags() & Flag::Forum;
 	}
@@ -222,32 +222,32 @@ public:
 		return botInfo ? botInfo->forum() : nullptr;
 	}
 
-	void setStoriesCorrespondent(bool is);
-	[[nodiscard]] bool storiesCorrespondent() const;
+	__declspec(dllexport) void setStoriesCorrespondent(bool is);
+	__declspec(dllexport) [[nodiscard]] bool storiesCorrespondent() const;
 
-	void setStarsPerMessage(int stars);
-	[[nodiscard]] int starsPerMessage() const;
+	__declspec(dllexport) void setStarsPerMessage(int stars);
+	__declspec(dllexport) [[nodiscard]] int starsPerMessage() const;
 
-	void setStarsRating(Data::StarsRating value);
-	[[nodiscard]] Data::StarsRating starsRating() const;
+	__declspec(dllexport) void setStarsRating(Data::StarsRating value);
+	__declspec(dllexport) [[nodiscard]] Data::StarsRating starsRating() const;
 
-	[[nodiscard]] bool canShareThisContact() const;
-	[[nodiscard]] bool canAddContact() const;
+	__declspec(dllexport) [[nodiscard]] bool canShareThisContact() const;
+	__declspec(dllexport) [[nodiscard]] bool canAddContact() const;
 
 	// In Data::Session::processUsers() we check only that.
 	// When actually trying to share contact we perform
 	// a full check by canShareThisContact() call.
-	[[nodiscard]] bool canShareThisContactFast() const;
+	__declspec(dllexport) [[nodiscard]] bool canShareThisContactFast() const;
 
-	[[nodiscard]] const QString &phone() const;
-	[[nodiscard]] QString username() const;
-	[[nodiscard]] QString editableUsername() const;
-	[[nodiscard]] const std::vector<QString> &usernames() const;
-	[[nodiscard]] bool isUsernameEditable(QString username) const;
+	__declspec(dllexport) [[nodiscard]] const QString &phone() const;
+	__declspec(dllexport) [[nodiscard]] QString username() const;
+	__declspec(dllexport) [[nodiscard]] QString editableUsername() const;
+	__declspec(dllexport) [[nodiscard]] const std::vector<QString> &usernames() const;
+	__declspec(dllexport) [[nodiscard]] bool isUsernameEditable(QString username) const;
 
-	void setBotVerifyDetails(Ui::BotVerifyDetails details);
-	void setBotVerifyDetailsIcon(DocumentId iconId);
-	[[nodiscard]] Ui::BotVerifyDetails *botVerifyDetails() const {
+	__declspec(dllexport) void setBotVerifyDetails(Ui::BotVerifyDetails details);
+	__declspec(dllexport) void setBotVerifyDetailsIcon(DocumentId iconId);
+	__declspec(dllexport) [[nodiscard]] Ui::BotVerifyDetails *botVerifyDetails() const {
 		return _botVerifyDetails.get();
 	}
 
@@ -256,12 +256,12 @@ public:
 		Contact,
 		NotContact,
 	};
-	[[nodiscard]] ContactStatus contactStatus() const;
-	[[nodiscard]] bool isContact() const;
-	void setIsContact(bool is);
+	__declspec(dllexport) [[nodiscard]] ContactStatus contactStatus() const;
+	__declspec(dllexport) [[nodiscard]] bool isContact() const;
+	__declspec(dllexport) void setIsContact(bool is);
 
-	[[nodiscard]] Data::LastseenStatus lastseen() const;
-	bool updateLastseen(Data::LastseenStatus value);
+	__declspec(dllexport) [[nodiscard]] Data::LastseenStatus lastseen() const;
+	__declspec(dllexport) bool updateLastseen(Data::LastseenStatus value);
 
 	enum class CallsStatus : char {
 		Unknown,
@@ -269,37 +269,37 @@ public:
 		Disabled,
 		Private,
 	};
-	CallsStatus callsStatus() const;
-	bool hasCalls() const;
-	void setCallsStatus(CallsStatus callsStatus);
+	__declspec(dllexport) CallsStatus callsStatus() const;
+	__declspec(dllexport) bool hasCalls() const;
+	__declspec(dllexport) void setCallsStatus(CallsStatus callsStatus);
 
-	[[nodiscard]] Data::Birthday birthday() const;
-	void setBirthday(Data::Birthday value);
-	void setBirthday(const tl::conditional<MTPBirthday> &value);
+	__declspec(dllexport) [[nodiscard]] Data::Birthday birthday() const;
+	__declspec(dllexport) void setBirthday(Data::Birthday value);
+	__declspec(dllexport) void setBirthday(const tl::conditional<MTPBirthday> &value);
 
-	[[nodiscard]] int commonChatsCount() const;
-	void setCommonChatsCount(int count);
+	__declspec(dllexport) [[nodiscard]] int commonChatsCount() const;
+	__declspec(dllexport) void setCommonChatsCount(int count);
 
-	[[nodiscard]] int peerGiftsCount() const;
-	void setPeerGiftsCount(int count);
+	__declspec(dllexport) [[nodiscard]] int peerGiftsCount() const;
+	__declspec(dllexport) void setPeerGiftsCount(int count);
 
-	[[nodiscard]] bool hasPrivateForwardName() const;
-	[[nodiscard]] QString privateForwardName() const;
-	void setPrivateForwardName(const QString &name);
+	__declspec(dllexport) [[nodiscard]] bool hasPrivateForwardName() const;
+	__declspec(dllexport) [[nodiscard]] QString privateForwardName() const;
+	__declspec(dllexport) void setPrivateForwardName(const QString &name);
 
-	[[nodiscard]] bool hasActiveStories() const;
-	[[nodiscard]] bool hasUnreadStories() const;
-	[[nodiscard]] bool hasActiveVideoStream() const;
-	void setStoriesState(StoriesState state);
+	__declspec(dllexport) [[nodiscard]] bool hasActiveStories() const;
+	__declspec(dllexport) [[nodiscard]] bool hasUnreadStories() const;
+	__declspec(dllexport) [[nodiscard]] bool hasActiveVideoStream() const;
+	__declspec(dllexport) void setStoriesState(StoriesState state);
 
-	[[nodiscard]] const Data::BusinessDetails &businessDetails() const;
-	void setBusinessDetails(Data::BusinessDetails details);
+	__declspec(dllexport) [[nodiscard]] const Data::BusinessDetails &businessDetails() const;
+	__declspec(dllexport) void setBusinessDetails(Data::BusinessDetails details);
 
-	void setStarRefProgram(StarRefProgram program);
+	__declspec(dllexport) void setStarRefProgram(StarRefProgram program);
 
-	[[nodiscard]] ChannelId personalChannelId() const;
-	[[nodiscard]] MsgId personalChannelMessageId() const;
-	void setPersonalChannel(ChannelId channelId, MsgId messageId);
+	__declspec(dllexport) [[nodiscard]] ChannelId personalChannelId() const;
+	__declspec(dllexport) [[nodiscard]] MsgId personalChannelMessageId() const;
+	__declspec(dllexport) void setPersonalChannel(ChannelId channelId, MsgId messageId);
 
 	[[nodiscard]] UserId botManagerId() const;
 	void setBotManagerId(UserId managerId);
@@ -316,13 +316,13 @@ public:
 
 	std::unique_ptr<BotInfo> botInfo;
 
-	[[nodiscard]] Api::DisallowedGiftTypes disallowedGiftTypes() const {
+	__declspec(dllexport) [[nodiscard]] Api::DisallowedGiftTypes disallowedGiftTypes() const {
 		return _disallowedGiftTypes;
 	}
-	void setDisallowedGiftTypes(Api::DisallowedGiftTypes types);
+	__declspec(dllexport) void setDisallowedGiftTypes(Api::DisallowedGiftTypes types);
 
 	[[nodiscard]] const TextWithEntities &note() const;
-	void setNote(const TextWithEntities &note);
+	__declspec(dllexport) void setNote(const TextWithEntities &note);
 
 private:
 	auto unavailableReasons() const

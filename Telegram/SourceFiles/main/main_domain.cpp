@@ -140,7 +140,7 @@ void Domain::activateAfterStarting() {
 	removePasscodeIfEmpty();
 }
 
-const std::vector<Domain::AccountWithIndex> &Domain::accounts() const {
+const std::vector<Domain::AccountWithIndex> &Domain::accounts() const { 
 	return _accounts;
 }
 

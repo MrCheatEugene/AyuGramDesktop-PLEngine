@@ -41,7 +41,7 @@ std::atomic<int> GlobalAtomicRequestId = 0;
 
 namespace details {
 
-int GetNextRequestId() {
+int MTP::details::GetNextRequestId() {
 	const auto result = ++GlobalAtomicRequestId;
 	if (result == std::numeric_limits<int>::max() / 2) {
 		GlobalAtomicRequestId = 0;

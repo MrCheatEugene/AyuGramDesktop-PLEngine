@@ -160,15 +160,15 @@ public:
 
 	void saveCurrentDraftToCloud();
 
-	void savePinnedOrder(Data::Folder *folder);
-	void savePinnedOrder(not_null<Data::Forum*> forum);
-	void savePinnedOrder(not_null<Data::SavedMessages*> saved);
-	void toggleHistoryArchived(
+	__declspec(dllexport) void savePinnedOrder(Data::Folder *folder);
+	__declspec(dllexport) void savePinnedOrder(not_null<Data::Forum*> forum);
+	__declspec(dllexport) void savePinnedOrder(not_null<Data::SavedMessages*> saved);
+	__declspec(dllexport) void toggleHistoryArchived(
 		not_null<History*> history,
 		bool archived,
 		Fn<void()> callback);
 
-	void requestMessageData(PeerData *peer, MsgId msgId, Fn<void()> done);
+	__declspec(dllexport) void requestMessageData(PeerData *peer, MsgId msgId, Fn<void()> done);
 	QString exportDirectMessageLink(
 		not_null<HistoryItem*> item,
 		bool inRepliesContext,
@@ -176,123 +176,123 @@ public:
 		std::optional<TimeId> videoTimestamp = {});
 	QString exportDirectStoryLink(not_null<Data::Story*> item);
 
-	void requestContacts();
-	void requestDialogs(Data::Folder *folder = nullptr);
-	void requestPinnedDialogs(Data::Folder *folder = nullptr);
-	void requestMoreBlockedByDateDialogs();
-	void requestMoreDialogsIfNeeded();
+	__declspec(dllexport) void requestContacts();
+	__declspec(dllexport) void requestDialogs(Data::Folder *folder = nullptr);
+	__declspec(dllexport) void requestPinnedDialogs(Data::Folder *folder = nullptr);
+	__declspec(dllexport) void requestMoreBlockedByDateDialogs();
+	__declspec(dllexport) void requestMoreDialogsIfNeeded();
 	rpl::producer<bool> dialogsLoadMayBlockByDate() const;
 	rpl::producer<bool> dialogsLoadBlockedByDate() const;
 
-	void requestWallPaper(
+	__declspec(dllexport) void requestWallPaper(
 		const QString &slug,
 		Fn<void(const Data::WallPaper &)> done,
 		Fn<void()> fail);
 
-	void requestFullPeer(not_null<PeerData*> peer);
-	void requestPeerSettings(not_null<PeerData*> peer);
+	__declspec(dllexport) void requestFullPeer(not_null<PeerData*> peer);
+	__declspec(dllexport) void requestPeerSettings(not_null<PeerData*> peer);
 
 	using UpdatedFileReferences = Data::UpdatedFileReferences;
 	using FileReferencesHandler = FnMut<void(const UpdatedFileReferences&)>;
-	void refreshFileReference(
+	__declspec(dllexport) void refreshFileReference(
 		Data::FileOrigin origin,
 		FileReferencesHandler &&handler);
-	void refreshFileReference(
+	__declspec(dllexport) void refreshFileReference(
 		Data::FileOrigin origin,
 		not_null<Storage::DownloadMtprotoTask*> task,
 		int requestId,
 		const QByteArray &current);
 
-	void requestChangelog(
+	__declspec(dllexport) void requestChangelog(
 		const QString &sinceVersion,
 		Fn<void(const MTPUpdates &result)> callback);
-	void requestDeepLinkInfo(
+	__declspec(dllexport) void requestDeepLinkInfo(
 		const QString &path,
 		Fn<void(TextWithEntities message, bool updateRequired)> callback);
-	void requestTermsUpdate();
-	void acceptTerms(bytes::const_span termsId);
+	__declspec(dllexport) void requestTermsUpdate();
+	__declspec(dllexport) void acceptTerms(bytes::const_span termsId);
 
-	void checkChatInvite(
+	__declspec(dllexport) void checkChatInvite(
 		const QString &hash,
 		FnMut<void(const MTPChatInvite &)> done,
 		Fn<void(const MTP::Error &)> fail);
-	void checkFilterInvite(
+	__declspec(dllexport) void checkFilterInvite(
 		const QString &slug,
 		FnMut<void(const MTPchatlists_ChatlistInvite &)> done,
 		Fn<void(const MTP::Error &)> fail);
 
-	void processFullPeer(
+	__declspec(dllexport) void processFullPeer(
 		not_null<PeerData*> peer,
 		const MTPmessages_ChatFull &result);
 
-	void migrateChat(
+	__declspec(dllexport) void migrateChat(
 		not_null<ChatData*> chat,
 		FnMut<void(not_null<ChannelData*>)> done,
 		Fn<void(const QString &)> fail = nullptr);
 
-	void markContentsRead(
+	__declspec(dllexport) void markContentsRead(
 		const base::flat_set<not_null<HistoryItem*>> &items);
-	void markContentsRead(not_null<HistoryItem*> item);
+	__declspec(dllexport) void markContentsRead(not_null<HistoryItem*> item);
 
-	void deleteAllFromParticipant(
+	__declspec(dllexport) void deleteAllFromParticipant(
 		not_null<ChannelData*> channel,
 		not_null<PeerData*> from);
-	void deleteSublistHistory(
+	__declspec(dllexport) void deleteSublistHistory(
 		not_null<ChannelData*> parentChat,
 		not_null<PeerData*> sublistPeer);
 
-	void requestWebPageDelayed(not_null<WebPageData*> page);
-	void clearWebPageRequest(not_null<WebPageData*> page);
-	void clearWebPageRequests();
+	__declspec(dllexport) void requestWebPageDelayed(not_null<WebPageData*> page);
+	__declspec(dllexport) void clearWebPageRequest(not_null<WebPageData*> page);
+	__declspec(dllexport) void clearWebPageRequests();
 
-	void scheduleStickerSetRequest(uint64 setId, uint64 access);
-	void requestStickerSets();
-	void saveStickerSets(
+	__declspec(dllexport) void scheduleStickerSetRequest(uint64 setId, uint64 access);
+	__declspec(dllexport) void requestStickerSets();
+	__declspec(dllexport) void saveStickerSets(
 		const Data::StickersSetsOrder &localOrder,
 		const Data::StickersSetsOrder &localRemoved,
 		Data::StickersType type);
-	void updateStickers();
-	void updateSavedGifs();
-	void updateMasks();
-	void updateCustomEmoji();
-	void requestSpecialStickersForce(
+	__declspec(dllexport) void updateStickers();
+	__declspec(dllexport) void updateSavedGifs();
+	__declspec(dllexport) void updateMasks();
+	__declspec(dllexport) void updateCustomEmoji();
+	__declspec(dllexport) void requestSpecialStickersForce(
 		bool faved,
 		bool recent,
 		bool attached);
-	void setGroupStickerSet(
+	__declspec(dllexport) void setGroupStickerSet(
 		not_null<ChannelData*> megagroup,
 		const StickerSetIdentifier &set);
-	void setGroupEmojiSet(
+	__declspec(dllexport) void setGroupEmojiSet(
 		not_null<ChannelData*> megagroup,
 		const StickerSetIdentifier &set);
 	[[nodiscard]] std::vector<not_null<DocumentData*>> *stickersByEmoji(
 		const QString &key);
 
-	void joinChannel(not_null<ChannelData*> channel);
-	void leaveChannel(not_null<ChannelData*> channel);
+	__declspec(dllexport) void joinChannel(not_null<ChannelData*> channel);
+	__declspec(dllexport) void leaveChannel(not_null<ChannelData*> channel);
 
-	void requestNotifySettings(const MTPInputNotifyPeer &peer);
-	void updateNotifySettingsDelayed(not_null<const Data::Thread*> thread);
-	void updateNotifySettingsDelayed(not_null<const PeerData*> peer);
-	void updateNotifySettingsDelayed(Data::DefaultNotify type);
-	void saveDraftToCloudDelayed(not_null<Data::Thread*> thread);
+	__declspec(dllexport) void requestNotifySettings(const MTPInputNotifyPeer &peer);
+	__declspec(dllexport) void updateNotifySettingsDelayed(not_null<const Data::Thread*> thread);
+	__declspec(dllexport) void updateNotifySettingsDelayed(not_null<const PeerData*> peer);
+	__declspec(dllexport) void updateNotifySettingsDelayed(Data::DefaultNotify type);
+	__declspec(dllexport) void saveDraftToCloudDelayed(not_null<Data::Thread*> thread);
 
-	void clearHistory(not_null<PeerData*> peer, bool revoke);
-	void deleteConversation(not_null<PeerData*> peer, bool revoke);
+	__declspec(dllexport) void clearHistory(not_null<PeerData*> peer, bool revoke);
+	__declspec(dllexport) void deleteConversation(not_null<PeerData*> peer, bool revoke);
 
 	bool isQuitPrevent();
 
-	void resolveJumpToDate(
+	__declspec(dllexport) void resolveJumpToDate(
 		Dialogs::Key chat,
 		const QDate &date,
 		Fn<void(not_null<PeerData*>, MsgId)> callback);
 
 	using SliceType = Data::LoadDirection;
-	void requestHistory(
+	__declspec(dllexport) void requestHistory(
 		not_null<History*> history,
 		MsgId messageId,
 		SliceType slice);
-	void requestSharedMedia(
+	__declspec(dllexport) void requestSharedMedia(
 		not_null<PeerData*> peer,
 		MsgId topicRootId,
 		PeerId monoforumPeerId,
@@ -306,105 +306,105 @@ public:
 		Data::MessagePosition offsetPosition,
 		Fn<void(Api::GlobalMediaResult)> done);
 
-	void readFeaturedSetDelayed(uint64 setId);
+	__declspec(dllexport) void readFeaturedSetDelayed(uint64 setId);
 
 	rpl::producer<SendAction> sendActions() const {
 		return _sendActions.events();
 	}
-	void sendAction(const SendAction &action);
-	void finishForwarding(const SendAction &action);
-	void forwardMessages(
+	__declspec(dllexport) void sendAction(const SendAction &action);
+	__declspec(dllexport) void finishForwarding(const SendAction &action);
+	__declspec(dllexport) void forwardMessages(
 		Data::ResolvedForwardDraft &&draft,
 		SendAction action,
 		FnMut<void()> &&successCallback = nullptr);
-	void shareContact(
+	__declspec(dllexport) void shareContact(
 		const QString &phone,
 		const QString &firstName,
 		const QString &lastName,
 		const SendAction &action,
 		Fn<void(bool)> done = nullptr);
-	void shareContact(
+	__declspec(dllexport) void shareContact(
 		not_null<UserData*> user,
 		const SendAction &action,
 		Fn<void(bool)> done = nullptr);
-	void applyAffectedMessages(
+	__declspec(dllexport) void applyAffectedMessages(
 		not_null<PeerData*> peer,
 		const MTPmessages_AffectedMessages &result);
 
-	void sendVoiceMessage(
+	__declspec(dllexport) void sendVoiceMessage(
 		QByteArray result,
 		VoiceWaveform waveform,
 		crl::time duration,
 		bool video,
 		const SendAction &action);
-	void sendFiles(
+	__declspec(dllexport) void sendFiles(
 		Ui::PreparedList &&list,
 		SendMediaType type,
 		std::shared_ptr<SendingAlbum> album,
 		const SendAction &action);
-	void sendFile(
+	__declspec(dllexport) void sendFile(
 		const QByteArray &fileContent,
 		SendMediaType type,
 		const SendAction &action);
 
-	void editMedia(
+	__declspec(dllexport) void editMedia(
 		Ui::PreparedList &&list,
 		SendMediaType type,
 		TextWithTags &&caption,
 		const SendAction &action);
 
-	void sendUploadedPhoto(
+	__declspec(dllexport) void sendUploadedPhoto(
 		FullMsgId localId,
 		Api::RemoteFileInfo info,
 		Api::SendOptions options);
-	void sendUploadedDocument(
+	__declspec(dllexport) void sendUploadedDocument(
 		FullMsgId localId,
 		Api::RemoteFileInfo file,
 		Api::SendOptions options);
 
-	void cancelLocalItem(not_null<HistoryItem*> item);
+	__declspec(dllexport) void cancelLocalItem(not_null<HistoryItem*> item);
 
-	void sendShortcutMessages(
+	__declspec(dllexport) void sendShortcutMessages(
 		not_null<PeerData*> peer,
 		BusinessShortcutId id);
-	void sendMessage(
+	__declspec(dllexport) void sendMessage(
 		MessageToSend &&message,
 		std::optional<MsgId> localMessageId = std::nullopt);
-	void sendBotStart(
+	__declspec(dllexport) void sendBotStart(
 		std::shared_ptr<Ui::Show> show,
 		not_null<UserData*> bot,
 		PeerData *chat = nullptr,
 		const QString &startTokenForChat = QString());
-	void sendInlineResult(
+	__declspec(dllexport) void sendInlineResult(
 		not_null<UserData*> bot,
 		not_null<InlineBots::Result*> data,
 		SendAction action,
 		std::optional<MsgId> localMessageId,
 		Fn<void(bool)> done = nullptr);
-	void sendMessageFail(
+	__declspec(dllexport) void sendMessageFail(
 		const MTP::Error &error,
 		not_null<PeerData*> peer,
 		uint64 randomId = 0,
 		FullMsgId itemId = FullMsgId());
-	void sendMessageFail(
+	__declspec(dllexport) void sendMessageFail(
 		const QString &error,
 		not_null<PeerData*> peer,
 		uint64 randomId = 0,
 		FullMsgId itemId = FullMsgId());
 
-	void reloadContactSignupSilent();
+	__declspec(dllexport) void reloadContactSignupSilent();
 	rpl::producer<bool> contactSignupSilent() const;
 	std::optional<bool> contactSignupSilentCurrent() const;
-	void saveContactSignupSilent(bool silent);
+	__declspec(dllexport) void saveContactSignupSilent(bool silent);
 
 	[[nodiscard]] auto botCommonGroups(not_null<UserData*> bot) const
 		-> std::optional<std::vector<not_null<PeerData*>>>;
-	void requestBotCommonGroups(not_null<UserData*> bot, Fn<void()> done);
+	__declspec(dllexport) void requestBotCommonGroups(not_null<UserData*> bot, Fn<void()> done);
 
-	void saveSelfBio(const QString &text);
+	__declspec(dllexport) void saveSelfBio(const QString &text);
 
-	void registerStatsRequest(MTP::DcId dcId, mtpRequestId id);
-	void unregisterStatsRequest(MTP::DcId dcId, mtpRequestId id);
+	__declspec(dllexport) void registerStatsRequest(MTP::DcId dcId, mtpRequestId id);
+	__declspec(dllexport) void unregisterStatsRequest(MTP::DcId dcId, mtpRequestId id);
 
 	[[nodiscard]] Api::Authorizations &authorizations();
 	[[nodiscard]] Api::AttachedStickers &attachedStickers();

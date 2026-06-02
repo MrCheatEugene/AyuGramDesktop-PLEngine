@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/gui">
+		<file alias="art/plengine-sm.png">../../art/plengine-sm.png</file>
         <file alias="art/ayu/alt/app.svg">../../art/ayu/alt/app.svg</file>
         <file alias="art/ayu/alt/app_icon.ico">../../art/ayu/alt/app_icon.ico</file>
         <file alias="art/ayu/bard/app.svg">../../art/ayu/bard/app.svg</file>

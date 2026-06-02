@@ -5,6 +5,11 @@ the official desktop application for the Telegram messaging service.
 For license and copyright information please follow this link:
 https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 */
+/*
+Emil Kh, AKA Pomorgite - t.me/Pomorgite // pmrgt.com
+AyuGram Plugin engine, 2026 // t.me/ayuplugg
+Follows GNU GPL v3 and Telegram Desktop licensing.
+*/
 #include "settings/sections/settings_main.h"
 
 #include "settings/settings_common_session.h"
@@ -89,6 +94,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 // AyuGram includes
 #include "ayu/ui/settings/settings_main.h"
+#include "plengine/settings/settings_main.h"
 #include "ayu/ui/utils/ayu_profile_values.h"
 #include "ayu/utils/telegram_helpers.h"
 
@@ -387,6 +393,13 @@ void BuildSectionButtons(SectionBuilder &builder) {
 		.icon = { &st::menuIconPremium },
 		.keywords = { u"ayu"_q },
 	});
+	builder.addSkip();
+	builder.addSectionButton({
+		.title = tr::ple_PLEngine(),
+		.targetSection = PLEMain::Id(),
+		.icon = { &st::menuIconExperimental },
+		.keywords = { u"ple"_q },
+		});
 	builder.addSkip();
 	builder.addDivider();
 	builder.addSkip();

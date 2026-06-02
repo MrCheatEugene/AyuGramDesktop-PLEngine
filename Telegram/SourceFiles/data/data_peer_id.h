@@ -14,7 +14,7 @@ struct PeerIdZeroHelper {
 using PeerIdZero = void(PeerIdZeroHelper::*)();
 
 template <uint8 Shift>
-struct ChatIdType {
+struct __declspec(dllexport) ChatIdType {
 	BareId bare = 0;
 
 	static constexpr BareId kShift = Shift;
@@ -105,7 +105,8 @@ struct PeerIdHelper {
 	}
 };
 
-struct PeerId {
+__declspec(dllexport) struct PeerId
+{
 	BareId value = 0;
 	static constexpr BareId kChatTypeMask = BareId(0xFFFFFFFFFFFFULL);
 
@@ -175,53 +176,53 @@ bool operator<=(PeerIdZero, PeerId) = delete;
 bool operator>=(PeerId, PeerIdZero) = delete;
 bool operator>=(PeerIdZero, PeerId) = delete;
 
-[[nodiscard]] inline constexpr bool peerIsUser(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr bool peerIsUser(PeerId id) noexcept {
 	return id.is<UserId>();
 }
 
-[[nodiscard]] inline constexpr bool peerIsChat(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr bool peerIsChat(PeerId id) noexcept {
 	return id.is<ChatId>();
 }
 
-[[nodiscard]] inline constexpr bool peerIsChannel(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr bool peerIsChannel(PeerId id) noexcept {
 	return id.is<ChannelId>();
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromUser(UserId userId) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromUser(UserId userId) noexcept {
 	return userId;
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromChat(ChatId chatId) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromChat(ChatId chatId) noexcept {
 	return chatId;
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromChannel(
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromChannel(
 		ChannelId channelId) noexcept {
 	return channelId;
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromUser(MTPlong userId) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromUser(MTPlong userId) noexcept {
 	return peerFromUser(userId.v);
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromChat(MTPint chatId) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromChat(MTPint chatId) noexcept {
 	return peerFromChat(chatId.v);
 }
 
-[[nodiscard]] inline constexpr PeerId peerFromChannel(
+[[nodiscard]] inline __declspec(dllexport) constexpr PeerId peerFromChannel(
 		MTPint channelId) noexcept {
 	return peerFromChannel(channelId.v);
 }
 
-[[nodiscard]] inline constexpr UserId peerToUser(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr UserId peerToUser(PeerId id) noexcept {
 	return id.to<UserId>();
 }
 
-[[nodiscard]] inline constexpr ChatId peerToChat(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr ChatId peerToChat(PeerId id) noexcept {
 	return id.to<ChatId>();
 }
 
-[[nodiscard]] inline constexpr ChannelId peerToChannel(PeerId id) noexcept {
+[[nodiscard]] inline __declspec(dllexport) constexpr ChannelId peerToChannel(PeerId id) noexcept {
 	return id.to<ChannelId>();
 }
 
