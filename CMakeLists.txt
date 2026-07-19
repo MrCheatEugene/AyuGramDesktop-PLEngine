@@ -63,4 +63,10 @@ set(desktop_app_skip_libs
 )
 
 add_subdirectory(cmake)
+
+# Optional: build plugin shared libraries under the plugins/ directory if present.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/plugins/CMakeLists.txt")
+    add_subdirectory(plugins)
+endif()
+
 add_subdirectory(Telegram)
