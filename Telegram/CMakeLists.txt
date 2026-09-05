@@ -251,6 +251,32 @@ set(ayugram_files
         info/profile/info_profile_music_button.h
 )
 
+set(plengine_files
+        MainQueue.h
+        MainQueue.cpp
+        ExternSharedVariables.h
+        ExternSharedVariables.cpp
+        AyuPlugin.h
+        PLEMains.cpp
+        PLEMains.h
+        PLESettings.cpp
+        PLESettings.h
+        debugger\Windbg.cpp
+        debugger\Windbg.h
+        helpers\MixedServer.cpp
+        helpers\MixedServer.h
+        helpers\PseudoPopup.cpp
+        helpers\PseudoPopup.h
+        settings\settings_engine.cpp
+        settings\settings_engine.h
+        settings\settings_main.cpp
+        settings\settings_main.h
+        settings\settings_plugins.cpp
+        settings\settings_plugins.h
+        settings\settings_trustedUA.cpp
+        settings\settings_trustedUA.h
+)
+
 if (NOT DESKTOP_APP_DISABLE_SWIFT6)
     telegram_add_apple_swift_runtime(Telegram)
 endif()
@@ -260,6 +286,7 @@ nice_target_sources(Telegram ${src_loc}
 PRIVATE
     ${style_files}
     ${ayugram_files}
+    ${plengine_files}
 
     api/api_attached_stickers.cpp
     api/api_attached_stickers.h

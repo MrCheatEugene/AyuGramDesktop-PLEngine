@@ -25,6 +25,7 @@
         <file alias="art/ayu/win95/app_icon.ico">../../art/ayu/win95/app_icon.ico</file>
         <file alias="art/ayu/yaplus/app.svg">../../art/ayu/yaplus/app.svg</file>
         <file alias="art/ayu/yaplus/app_icon.ico">../../art/ayu/yaplus/app_icon.ico</file>
+        <file alias="art/plengine-sm.png">../../art/plengine-sm.png</file>
         <file alias="icons/ayu/nocover.svg">../../icons/ayu/nocover.svg</file>
         <file alias="icons/ayu/donates/boosty.svg">../../icons/ayu/donates/boosty.svg</file>
         <file alias="icons/ayu/donates/ton.svg">../../icons/ayu/donates/ton.svg</file>
