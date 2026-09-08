@@ -77,3 +77,4 @@ settings.local.json
 Telegram/SourceFiles/_other/packer_private.h
 # ignore
 /1out
+/1-out
