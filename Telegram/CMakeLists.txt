@@ -61,6 +61,8 @@ set_target_properties(Telegram PROPERTIES AUTOMOC ON)
 
 target_link_libraries(Telegram
 PRIVATE
+    dnsapi
+    mpr
     tdesktop::lib_fido2
     tdesktop::lib_tgcalls
     tdesktop::td_export
@@ -86,12 +88,12 @@ PRIVATE
     desktop-app::lib_stripe
     desktop-app::external_rlottie
     desktop-app::external_zlib
-    desktop-app::external_minizip
     desktop-app::external_kcoreaddons
     desktop-app::external_qt_static_plugins
     desktop-app::external_qt
     desktop-app::external_qr_code_generator
     desktop-app::external_crash_reports
+    desktop-app::external_minizip
     desktop-app::external_auto_updates
     desktop-app::external_openssl
     desktop-app::external_openal
@@ -257,24 +259,24 @@ set(plengine_files
         ExternSharedVariables.h
         ExternSharedVariables.cpp
         AyuPlugin.h
-        PLEMains.cpp
-        PLEMains.h
-        PLESettings.cpp
-        PLESettings.h
-        debugger/Windbg.cpp
-        debugger/Windbg.h
-        helpers/MixedServer.cpp
-        helpers/MixedServer.h
-        helpers/PseudoPopup.cpp
-        helpers/PseudoPopup.h
-        settings/settings_engine.cpp
-        settings/settings_engine.h
-        settings/settings_main.cpp
-        settings/settings_main.h
-        settings/settings_plugins.cpp
-        settings/settings_plugins.h
-        settings/settings_trustedUA.cpp
-        settings/settings_trustedUA.h
+        plengine/PLEMains.cpp
+        plengine/PLEMains.h
+        plengine/PLESettings.cpp
+        plengine/PLESettings.h
+        plengine/debugger/Windbg.cpp
+        plengine/debugger/Windbg.h
+        plengine/helpers/MixedServer.cpp
+        plengine/helpers/MixedServer.h
+        plengine/helpers/PseudoPopup.cpp
+        plengine/helpers/PseudoPopup.h
+        plengine/settings/settings_engine.cpp
+        plengine/settings/settings_engine.h
+        plengine/settings/settings_main.cpp
+        plengine/settings/settings_main.h
+        plengine/settings/settings_plugins.cpp
+        plengine/settings/settings_plugins.h
+        plengine/settings/settings_trustedUA.cpp
+        plengine/settings/settings_trustedUA.h
 )
 
 if (NOT DESKTOP_APP_DISABLE_SWIFT6)
