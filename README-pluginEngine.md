@@ -280,16 +280,42 @@ It interrupts [this function](/Telegram/SourceFiles/apiwrap.h#L368) in ApiWrap:
 		MessageToSend &&message,
 		std::optional<MsgId> localMessageId = std::nullopt);
 ```
-Must be defined as: `EXTERN_DLL_EXPORT InternalDoPreProcessMessage doPreProcessMessage(char* in, char* out)`  <br>
+#### Deprecation notice
+There are now two versions of message hook:
+`doPreProcessMessage(char* in, char* out)`<br>
+`doPreProcessMessageStd(std::string *in, std::string* out)`
+
+First one (`char*` one) is now **legacy** because it caused [memory issues](/issues/6). <br>
+It is replaced by **doPreProcessMessageStd**.
+
+Hook must be defined as: `EXTERN_DLL_EXPORT InternalDoPreProcessMessage doPreProcessMessageStd(std::string *in, std::string* out)`  <br>
 An example:
 			
 ```cpp
-EXTERN_DLL_EXPORT InternalDoPreProcessMessage doPreProcessMessage(char* in, char* out) {
-    std::string i(in);
-    i=std::regex_replace(i, std::regex("hello"), "replaced");
-    strcpy(out, i.c_str());
-    out[4096] = '\0';
+EXTERN_DLL_EXPORT InternalDoPreProcessMessage doPreProcessMessageStd(std::string *in, std::string* out) {
+    out->assign(std::regex_replace(*in, std::regex("hello"), "replaced"));
 }
+```
+
+### Popup hook
+Plugin can add an item to HistoryItem (message) popup menu.<br>
+[`Ui::PseudoPopup`](/Telegram/SourceFiles/plengine/helpers/PseudoPopup.cpp) is a proxy class between [`Ui::PopupMenu`](https://github.com/AyuGram/lib_ui/blob/master-ui/ui/widgets/popup_menu.h) and your Plugin.<br>
+It is required, because otherwise QT throws memory access errors. <br>
+```cpp
+EXTERN_DLL_EXPORT void doDrawPopup(Ui::PseudoPopup* popupMenu, HistoryItem* i) {
+    popupMenu->addAction(std::string("Click me!"), [=] {
+        MessageBoxA(NULL, "Hello!", "user interaction!!", MB_OK);
+    });
+}
+```
+
+## Debugging
+You can debug your plugin using minidumps. They're saved to `tdata/dumps/*.dmp` if PLEngine or AyuGram crashes.<br>
+Credits:
+```
+// Source - https://stackoverflow.com/a/25442301
+// Posted by Praveen
+// Retrieved 2026-07-15, License - CC BY-SA 3.0
 ```
 
 ## Guides 
@@ -311,10 +337,16 @@ EXTERN_DLL_EXPORT InternalDoPreProcessMessage doPreProcessMessage(char* in, char
 |`AYUPL_HOST` | Host that'll be used when launching the API | `127.0.0.1`|
 |`AYUPL_PORT` | Port that'll be used when launching the API | `8080`|
 |`AYUPL_CONSOLE` | If it exists, a separate console on a main thread showing debug info will be shown. | Not Set|
+|`AYUPL_SSL_CERT` | SSL certificate path | Not set|
+|`AYUPL_SSL_KEY` | SSL certificate private key path **WITHOUT ANY PASSWORD** | Not set|
 
 ## HTTP API 
 PLEngine HTTP API by default runs on 127.0.0.1:8080 (if not redefined).
 It can be used for external applications (or plugins) to do stuff, externally. Or even do stuff, without loading a module into AyuGram. 
+
+### SSL support
+HTTP API supports SSL. To activate it, ENV variables of `AYUPL_SSL_CERT`, `AYUPL_SSL_KEY` both must be set to certificate and private key of an SSL certificate, **WITHOUT ANY PASSWORD, IN PEM.**
+This way, the server will work as an HTTPS server. <br>
 
 ### Trust elevation 
 Whenever you run a certain endpoint, your User-Agent isn't trusted by default.
